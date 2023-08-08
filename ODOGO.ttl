@@ -1,0 +1,662 @@
+@prefix dc: <http://purl.org/dc/terms/> .
+@prefix odogo: <http://odogo.byethost16.com/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://odogo.byethost16.com/> rdf:type owl:Ontology ;
+     dc:title "Offshore Decommissioning Oil & Gas Ontology (ODOGO)"@en ;
+     dc:publisher "National Decommissioning Centre"@en ;
+     dc:creator "Adam Arfaoui" ;
+     dc:created "2020-03-20"@en ;
+     dc:modified "2020-02-12"@en ;
+     rdfs:isDefinedBy <http://odogo.byethost16.com/index.ttl> ;
+     rdfs:label "Offshore Decommissioning Oil & Gas Ontology (ODOGO)" ;
+     dc:description """This ontology describes all classes, object properties, data properties, named individuals, annotation properties and namespace declarations to define an offshore decommissioning project. This first release describes a schema to define all information for project-relevant sites.""" ;
+     owl:versionInfo "0.0.1" .
+
+#################################################################
+#    Datatypes
+#################################################################
+odogo:Shapefile rdf:type rdfs:Datatype ;
+     rdfs:isDefinedBy <https://www.esri.com/library/whitepapers/pdfs/shapefile.pdf> ;
+     rdfs:seeAlso <https://www.wikidata.org/wiki/Q278934> ; 
+     rdfs:label "Shapefile" ;
+     rdfs:comment "The datatype of RDF literals storing package of file formats describing geographic features." .
+
+#################################################################
+#    Object Properties
+#################################################################
+
+odogo:hasPoint rdf:type owl:ObjectProperty ;
+     rdfs:label "hasPoint" ;
+     rdfs:domain odogo:Site ;
+     rdfs:range odogo:Point . 
+
+odogo:hasPath rdf:type owl:ObjectProperty ;
+     rdfs:label "hasPath" ;
+     rdfs:domain odogo:Site ;
+     rdfs:range odogo:Path .
+
+odogo:hasZone rdf:type owl:ObjectProperty ;
+     rdfs:label "hasZone" ;
+     rdfs:domain odogo:Site ;
+     rdfs:range odogo:Zone .
+
+odogo:hasPointCoordinates rdf:type owl:ObjectProperty ;
+     rdfs:label "hasPointCoordinates" ;
+     owl:cardinality "1"^^xsd:int ; 
+     rdfs:domain odogo:Point ;
+     rdfs:range odogo:Coordinates .
+
+odogo:hasPathCoordinates rdf:type owl:ObjectProperty ;
+     rdfs:label "hasPathCoordinates" ;
+     owl:minCardinality "2"^^xsd:int ; 
+     rdfs:domain odogo:Path ;
+     rdfs:range odogo:Coordinates .
+
+odogo:hasZoneCoordinates rdf:type owl:ObjectProperty ;
+     rdfs:label "hasZoneCoordinates" ;
+     owl:minCardinality "3"^^xsd:int ; 
+     rdfs:domain odogo:Zone ;
+     rdfs:range odogo:Coordinates .
+
+odogo:hasFacility rdf:type owl:ObjectProperty ;
+     rdfs:label "hasFacility" ;
+     rdfs:domain odogo:Infrastructure ;
+     rdfs:range odogo:Facility .
+
+odogo:hasAgentRole rdf:type owl:ObjectProperty ;
+     rdfs:label "hasAgentRole" ;
+     rdfs:domain odogo:Agent ;
+     rdfs:range odogo:AgentRole .
+
+odogo:hasSite rdf:type owl:ObjectProperty ;
+     rdfs:label "hasSite" ;
+     rdfs:domain odogo:Thing ;
+     rdfs:range odogo:Site .
+
+odogo:Operates rdf:type owl:ObjectProperty ;
+     rdfs:label "Operates" ;
+     rdfs:domain odogo:Operator ;
+     rdfs:range odogo:Facility .
+
+odogo:Owns rdf:type owl:ObjectProperty ;
+     rdfs:label "Owns" ;
+     rdfs:domain odogo:Owner ;
+     rdfs:range odogo:Facility .
+
+odogo:Employs rdf:type owl:ObjectProperty ;
+     rdfs:label "Employs" ;
+     rdfs:domain odogo:Employer ;
+     rdfs:range odogo:Employee.
+
+odogo:Ships rdf:type owl:ObjectProperty ;
+     rdfs:label "Ships" ;
+     rdfs:domain odogo:Shipper ;
+     rdfs:range odogo:OffshorePlatform .
+
+odogo:ShipsTo rdf:type owl:ObjectProperty ;
+     rdfs:label "ShipsTo" ;
+     rdfs:domain odogo:OffshorePlatform ;
+     rdfs:range odogo:Port .
+
+odogo:Dismantles rdf:type owl:ObjectProperty ;
+     rdfs:label "Dismantles" ;
+     rdfs:domain odogo:Contractor ;
+     rdfs:range odogo:OffshorePlatform .
+
+odogo:Regulates rdf:type owl:ObjectProperty ;
+     rdfs:label "Regulates" ;
+     rdfs:domain odogo:Regulator ;
+     rdfs:range odogo:OffshorePlatform .
+
+odogo:hasSeaWaterTemperature rdf:type owl:ObjectProperty ;
+     rdfs:label "hasSeaWaterTemperature" ;
+     rdfs:domain odogo:Site ;
+     rdfs:range odogo:SeaWaterTemperature .
+
+odogo:hasSeaWaterSalinity rdf:type owl:ObjectProperty ;
+     rdfs:label "hasSeaWaterSalinity" ;
+     rdfs:domain odogo:Site ;
+     rdfs:range odogo:SeaWaterSalinity .
+
+odogo:hasSeaWaterDensity rdf:type owl:ObjectProperty ;
+     rdfs:label "hasSeaWaterDensity" ;
+     rdfs:domain odogo:Site ;
+     rdfs:range odogo:SeaWaterDensity .
+     
+odogo:hasSeaWaterCurrent rdf:type owl:ObjectProperty ;
+     rdfs:label "hasSeaWaterCurrent" ;
+     rdfs:domain odogo:Site ;
+     rdfs:range odogo:SeaWaterCurrent .
+     
+odogo:hasSeaWaterLevel rdf:type owl:ObjectProperty ;
+     rdfs:label "hasSeaWaterLevel" ;
+     rdfs:domain odogo:Site ;
+     rdfs:range odogo:SeaWaterLevel .
+
+odogo:hasWaveDistribution rdf:type owl:ObjectProperty ;
+     rdfs:label "hasWaveDistribution" ;
+     rdfs:domain odogo:Site ;
+     rdfs:range odogo:WaveDistribution .
+     
+odogo:hasUnderWaterNoise rdf:type owl:ObjectProperty ;
+     rdfs:label "hasUnderWaterNoise" ;
+     rdfs:domain odogo:Site ;
+     rdfs:range odogo:UnderWaterNoise .
+
+odogo:hasAirTemperature rdf:type owl:ObjectProperty ;
+     rdfs:label "hasAirTemperature" ;
+     rdfs:domain odogo:Site ;
+     rdfs:range odogo:AirTemperature .
+
+odogo:hasWindDistribution rdf:type owl:ObjectProperty ;
+     rdfs:label "hasWindDistribution" ;
+     rdfs:domain odogo:Site ;
+     rdfs:range odogo:WindDistribution .
+
+odogo:hasWaterDepth rdf:type owl:ObjectProperty ;
+     rdfs:label "hasWaterDepth" ;
+     rdfs:domain odogo:Site ;
+     rdfs:range odogo:WaterDepth .
+
+#################################################################
+#    Datatype Properties
+#################################################################
+
+odogo:hasShapefile rdf:type owl:DatatypeProperty ;
+     rdfs:label "hasShapefile" ;
+     rdfs:domain odogo:Zone ;
+     rdfs:range odogo:Shapefile .
+
+odogo:hasCoordinateSystem rdf:type owl:DatatypeProperty ;
+     rdfs:label "hasCoordinateSystem" ;
+     rdfs:comment "Describes the CoordinateSystem of Coordinates class individuals." ;
+     rdfs:domain odogo:Site ;
+     rdfs:range rdf:PlainLiteral .
+
+odogo:hasLatitude rdf:type owl:DatatypeProperty ;
+     rdfs:comment "The WGS84 latitude of a point (decimal degrees)." ;
+     rdfs:label "hasLatitude" ;
+     rdfs:domain odogo:Latitude ;
+     rdfs:range xsd:decimal ;
+     rdfs:seeAlso <http://www.w3.org/2003/01/geo/wgs84_pos#> .
+
+odogo:hasLongitude rdf:type owl:DatatypeProperty ;
+     rdfs:label "hasLongitude" ;
+     rdfs:comment "The WGS84 longitude of a point (decimal degrees)." ;
+     rdfs:domain odogo:Longitude ;
+     rdfs:range xsd:decimal ;
+     rdfs:seeAlso <http://www.w3.org/2003/01/geo/wgs84_pos#> .
+
+odogo:hasAltitude rdf:type owl:DatatypeProperty ;
+     rdfs:label "hasAltitude" ;
+     rdfs:comment "The WGS84 altitude of a point (decimal meters above the local reference ellipsoid)." ;
+     rdfs:domain odogo:Altitude ;
+     rdfs:range xsd:decimal ;
+     rdfs:seeAlso <http://www.w3.org/2003/01/geo/wgs84_pos#> .
+
+
+#################################################################
+#    Classes
+#################################################################
+
+odogo:Thing rdf:type owl:Class ;
+     rdfs:label "Thing" ;
+     rdfs:comment "The class of Thing classes." ;
+     rdfs:subClassOf owl:Thing . 
+
+odogo:Place rdf:type owl:Class ;
+     rdfs:label "Place" ;
+     rdfs:comment "The class of Place classes." ;
+     rdfs:subClassOf odogo:Thing . 
+
+odogo:Concept rdf:type owl:Class ;
+     rdfs:label "Concept" ;
+     rdfs:comment "The class of Concept classes." ;
+     rdfs:subClassOf odogo:Thing . 
+
+odogo:Agent rdf:type owl:Class ;
+     rdfs:label "Agent" ;
+     rdfs:comment "The class of Agent classes." ;
+     rdfs:subClassOf odogo:Thing . 
+
+odogo:Site rdf:type owl:Class ;
+     owl:unionOf (odogo:Point odogo:Path odogo:Zone) ;
+     rdfs:label "Site" ;
+     rdfs:comment "The class of Site classes." ;
+     rdfs:subClassOf odogo:Concept .
+
+odogo:PhysicalEntity rdf:type owl:Class ;
+     rdfs:label "PhysicalEntity" ;
+     rdfs:comment "The class of PhysicalEntity classes." ;
+     rdfs:subClassOf odogo:Thing .      
+
+odogo:SpatialGeometry rdf:type owl:Class ;
+     rdfs:label "SpatialGeometry" ;
+     rdfs:comment "The class of SpatialGeometry classes." ;
+     rdfs:subClassOf odogo:Thing .  
+
+odogo:Point rdf:type owl:Restriction ;
+     owl:onProperty odogo:hasCoordinates ;
+     owl:cardinality "1"^^xsd:int ;
+     rdfs:label "Point" ;
+     rdfs:comment "The restriction class of Point." ;
+     rdfs:subClassOf odogo:Coordinates .  
+
+odogo:Path rdf:type owl:Restriction ;
+     owl:onProperty odogo:hasCoordinates ;
+     owl:minCardinality "2"^^xsd:int ;
+     rdfs:label "Path" ;
+     rdfs:comment "The class of Path classes." ;
+     rdfs:subClassOf odogo:Coordinates .  
+
+odogo:Zone rdf:type owl:Restriction ;
+     owl:onProperty odogo:hasCoordinates ;
+     owl:minCardinality "3"^^xsd:int ;
+     rdfs:label "Zone" ;
+     rdfs:comment "The class of zone classes." ;
+     rdfs:subClassOf odogo:Coordinates .  
+
+odogo:PhysicalProperty rdf:type owl:Class ;
+     rdfs:label "PhysicalProperty" ;
+     rdfs:subClassOf odogo:Thing . 
+
+odogo:OceanographyProperty rdf:type owl:Class ;
+     rdfs:label "OceanographyProperty" ;
+     rdfs:subClassOf odogo:PhysicalProperty . 
+
+odogo:SeaWaterTemperature rdf:type owl:Restriction ;
+     owl:onProperty odogo:hasSeaWaterTemperature ;
+     owl:hasValue rdfs:Literal ; 
+     rdfs:label "SeaWaterTemperature" ;
+     rdfs:subClassOf odogo:OceanographyProperty . 
+
+odogo:SeaWaterSalinity rdf:type owl:Restriction ;
+     owl:onProperty odogo:hasSeaWaterSalinity ;
+     owl:hasValue rdfs:Literal ; 
+     rdfs:label "SeaWaterSalinity" ;
+     rdfs:subClassOf odogo:OceanographyProperty . 
+
+odogo:SeaWaterDensity rdf:type owl:Restriction ;
+     owl:onProperty odogo:hasSeaWaterDensity ;
+     owl:hasValue rdfs:Literal ; 
+     rdfs:label "SeaWaterDensity" ;
+     rdfs:subClassOf odogo:OceanographyProperty .
+
+odogo:SeaWaterCurrent rdf:type owl:Restriction ;
+     owl:onProperty odogo:hasSeaWaterCurrent ;
+     owl:hasValue rdfs:Literal ; 
+     rdfs:label "SeaWaterCurrent" ;
+     rdfs:subClassOf odogo:OceanographyProperty . 
+
+odogo:SeaWaterLevel rdf:type owl:Restriction ;
+     owl:onProperty odogo:hasSeaWaterLevel ;
+     owl:hasValue rdfs:Literal ; 
+     rdfs:label "SeaWaterLevel" ;
+     rdfs:subClassOf odogo:OceanographyProperty . 
+
+odogo:WaveDistribution rdf:type owl:Restriction ;
+     owl:onProperty odogo:hasWaveDistribution ;
+     owl:hasValue rdfs:Literal ; 
+     rdfs:label "WaveDistribution" ;
+     rdfs:subClassOf odogo:OceanographyProperty . 
+
+odogo:UnderWaterNoise rdf:type owl:Restriction ;
+     owl:onProperty odogo:hasUnderWaterNoise ;
+     owl:hasValue rdfs:Literal ; 
+     rdfs:label "UnderWaterNoise" ;
+     rdfs:subClassOf odogo:OceanographyProperty . 
+
+odogo:WaterDepth rdf:type owl:Restriction ;
+     owl:onProperty odogo:hasWaterDepth ;
+     owl:hasValue rdfs:Literal ; 
+     rdfs:label "WaterDepth" ;
+     rdfs:subClassOf odogo:OceanographyProperty . 
+
+odogo:MeteorologyProperty rdf:type owl:Class ;
+     rdfs:label "MeteorologyProperty" ;
+     rdfs:subClassOf odogo:PhysicalProperty .
+
+odogo:AirTemperature rdf:type owl:Restriction ;
+     owl:onProperty odogo:hasAirTemperature ;
+     owl:hasValue rdfs:Literal ; 
+     rdfs:label "AirTemperature" ;
+     rdfs:subClassOf odogo:MeteorologyProperty . 
+
+odogo:WindDistribution rdf:type owl:Restriction ;
+     owl:onProperty odogo:hasWindDistribution ;
+     owl:hasValue rdfs:Literal ; 
+     rdfs:label "WindDistribution" ;
+     rdfs:subClassOf odogo:MeteorologyProperty . 
+
+odogo:Latitude owl:equivalentClass [
+     rdf:type rdfs:Datatype ;
+     owl:onDatatype xsd:decimal ;
+     owl:withRestrictions (   [ xsd:minExclusive     "-90"^^xsd:decimal ]
+                              [ xsd:maxInclusive     "90"^^xsd:decimal  ]
+                          ) ] ; 
+     rdfs:label "Latitude" .
+
+odogo:Longitude owl:equivalentClass [
+     rdf:type rdfs:Datatype ;
+     owl:onDatatype xsd:decimal ;
+     owl:withRestrictions (   [ xsd:minExclusive     "-90"^^xsd:decimal ]
+                              [ xsd:maxInclusive     "90"^^xsd:decimal  ]
+                          ) ] ;
+     rdfs:label "Longitude" .
+
+odogo:Altitude owl:equivalentClass [
+     rdf:type rdfs:Datatype ;
+     owl:onDatatype xsd:decimal ;  ] ;
+     rdfs:label "Altitude" ;
+     rdfs:comment "The WGS84 altitude of a point (decimal meters above the local reference ellipsoid)." .
+
+odogo:Coordinates rdf:type owl:Restriction ; 
+     owl:intersectionOf (odogo:Latitude odogo:Longitude odogo:Altitude ) ; 
+     rdfs:label "Coordinates" ;
+     rdfs:comment "The collection datatype of latitude, longitude and altitude." ;
+     rdfs:subClassOf odogo:SpatialGeometry .  
+
+odogo:Infrastructure rdf:type owl:Class ;
+     rdfs:label "Infrastructure" ;
+     rdfs:comment "The class of Infrastructure classes." ;
+     rdfs:subClassOf odogo:PhysicalEntity .
+
+odogo:EnergyInfrastructure rdf:type owl:Class ;
+     rdfs:label "EnergyInfrastructure" ;
+     rdfs:comment "The class of EnergyInfrastructure classes." ;
+     rdfs:subClassOf odogo:Infrastructure .
+
+odogo:WaterInfrastructure rdf:type owl:Class ;
+     rdfs:label "WaterInfrastructure" ;
+     rdfs:comment "The class of WaterInfrastructure classes." ;
+     rdfs:subClassOf odogo:Infrastructure .
+
+odogo:WasteInfrastructure rdf:type owl:Class ;
+     rdfs:label "WasteInfrastructure" ;
+     rdfs:comment "The class of WasteInfrastructure classes." ;
+     rdfs:subClassOf odogo:Infrastructure .
+
+odogo:TransportInfrastructure rdf:type owl:Class ;
+     rdfs:label "TransportInfrastructure" ;
+     rdfs:comment "The class of TransportInfrastructure classes." ;
+     rdfs:subClassOf odogo:Infrastructure .
+
+odogo:NaturalInfrastructure rdf:type owl:Class ;
+     rdfs:label "NaturalInfrastructure" ;
+     rdfs:comment "The class of NaturalInfrastructure classes." ;
+     rdfs:subClassOf odogo:Infrastructure .
+
+odogo:InformationInfrastructure rdf:type owl:Class ;
+     rdfs:label "InformationInfrastructure" ;
+     rdfs:comment "The class of InformationInfrastructure classes." ;
+     rdfs:subClassOf odogo:Infrastructure .
+
+odogo:Facility rdf:type owl:Class ;
+     rdfs:label "Facility" ;
+     rdfs:comment "The class of Facility classes." ;
+     rdfs:subClassOf odogo:PhysicalEntity .
+
+odogo:Port rdf:type owl:Class ;
+     owl:intersectionOf (odogo:TransportInfrastructure odogo:Facility) ; 
+     rdfs:label "Port" ;
+     rdfs:comment "The class of Port classes." ;
+     rdfs:subClassOf odogo:Facility .
+
+odogo:OffshorePlatform rdf:type owl:Class ;
+     owl:intersectionOf (odogo:EnergyInfrastructure odogo:Facility) ; 
+     rdfs:label "OffshorePlatform" ;
+     rdfs:comment "The class of Offshore Platform classes." ;
+     rdfs:subClassOf odogo:Facility .
+
+odogo:Pipeline rdf:type owl:Class ;
+     owl:intersectionOf (odogo:EnergyInfrastructure odogo:TransportInfrastructure) ; 
+     rdfs:label "Pipeline" ;
+     rdfs:comment "The class of Pipeline classes." ;
+     rdfs:subClassOf odogo:Infrastructure .
+
+odogo:Cable rdf:type owl:Class ;
+     rdfs:label "Cable" ;
+     rdfs:comment "The class of Cable classes." ;
+     rdfs:subClassOf odogo:Infrastructure .
+
+odogo:GeoPhysicalPlace rdf:type owl:Class ;
+     rdfs:label "GeoPhysicalPlace" ;
+     rdfs:comment "The class of GeoPhysicalPlace classes." ;
+     rdfs:subClassOf odogo:Place .
+
+odogo:StatisticalPlace rdf:type owl:Class ;
+     rdfs:label "StatisticalPlace" ;
+     rdfs:comment "The class of StatisticalPlace classes." ;
+     rdfs:subClassOf odogo:Place .
+
+odogo:FAOFisheryStatisticalArea rdf:type owl:Class ;
+     rdfs:label "FAOFisheryStatisticalArea" ;
+     rdfs:subClassOf odogo:StatisticalPlace .
+
+odogo:Continent rdf:type owl:Class ;
+     rdfs:label "Continent" ;
+     rdfs:comment "The class of Continent classes." ;
+     rdfs:subClassOf odogo:GeoPhysicalPlace .
+
+odogo:Ocean rdf:type owl:Class ;
+     rdfs:label "Ocean" ;
+     rdfs:comment "The class of Ocean classes." ;
+     rdfs:subClassOf odogo:GeoPhysicalPlace .
+
+odogo:Sea rdf:type owl:Class ;
+     rdfs:label "Sea" ;
+     rdfs:comment "The class of Sea classes." ;
+     rdfs:subClassOf odogo:GeoPhysicalPlace .
+
+odogo:Field rdf:type owl:Class ;
+     rdfs:label "Field" ;
+     rdfs:comment "The class of Field classes." ;
+     rdfs:subClassOf odogo:GeoPhysicalPlace .
+
+odogo:GeoPoliticalPlace rdf:type owl:Class ;
+     rdfs:label "GeoPoliticalPlace" ;
+     rdfs:comment "The class of GeoPoliticalPlace classes." ;
+     rdfs:subClassOf odogo:Place .
+
+odogo:AdministrativeDivision rdf:type owl:Class ;
+     rdfs:label "AdministrativeDivision" ;
+     rdfs:comment "The class of AdministrativeDivision classes." ;
+     rdfs:subClassOf odogo:GeoPoliticalPlace .
+
+odogo:Region rdf:type owl:Class ;
+     rdfs:label "Region" ;
+     rdfs:subClassOf odogo:AdministrativeDivision .
+
+odogo:Country rdf:type owl:Class ;
+     rdfs:label "Country" ;
+     rdfs:subClassOf odogo:AdministrativeDivision .
+
+odogo:City rdf:type owl:Class ;
+     rdfs:label "City" ;
+     rdfs:subClassOf odogo:AdministrativeDivision .
+
+odogo:Province rdf:type owl:Class ;
+     rdfs:label "Province" ;
+     rdfs:subClassOf odogo:AdministrativeDivision .
+
+odogo:County rdf:type owl:Class ;
+     rdfs:label "County" ;
+     rdfs:subClassOf odogo:AdministrativeDivision .
+
+odogo:District rdf:type owl:Class ;
+     rdfs:label "District" ;
+     rdfs:subClassOf odogo:AdministrativeDivision .
+
+odogo:Municipality rdf:type owl:Class ;
+     rdfs:label "Municipality" ;
+     rdfs:subClassOf odogo:AdministrativeDivision .
+
+odogo:Jurisdiction rdf:type owl:Class ;
+     rdfs:label "Jurisdiction" ;
+     rdfs:subClassOf odogo:AdministrativeDivision .
+
+odogo:Town rdf:type owl:Class ;
+     rdfs:label "Town" ;
+     rdfs:subClassOf odogo:AdministrativeDivision .
+
+odogo:Village rdf:type owl:Class ;
+     rdfs:label "Village" ;
+     rdfs:subClassOf odogo:AdministrativeDivision .
+
+odogo:MaritimeBoundary rdf:type owl:Class ;
+     rdfs:label "MaritimeBoundary" ;
+     rdfs:subClassOf odogo:GeoPoliticalPlace .
+
+odogo:ArchipelagicWaters rdf:type owl:Class ;
+     rdfs:label "ArchipelagicWaters" ;
+     rdfs:subClassOf odogo:MaritimeBoundary .
+
+odogo:InternalWaters rdf:type owl:Class ;
+     rdfs:label "InternalWaters" ;
+     rdfs:subClassOf odogo:MaritimeBoundary .
+
+odogo:TerritorialSea rdf:type owl:Class ;
+     rdfs:label "TerritorialSea" ;
+     rdfs:subClassOf odogo:MaritimeBoundary .
+
+odogo:ContiguousZone rdf:type owl:Class ;
+     rdfs:label "ContiguousZone" ;
+     rdfs:subClassOf odogo:MaritimeBoundary .
+
+odogo:ExclusiveEconomicZone rdf:type owl:Class ;
+     rdfs:label "ExclusiveEconomicZone" ;
+     rdfs:subClassOf odogo:MaritimeBoundary .
+
+odogo:ContinentalShelf rdf:type owl:Class ;
+     rdfs:label "ContinentalShelf" ;
+     rdfs:subClassOf odogo:MaritimeBoundary .
+
+odogo:HighSeas rdf:type owl:Class ;
+     rdfs:label "HighSeas" ;
+     rdfs:subClassOf odogo:MaritimeBoundary .
+
+odogo:Regulation rdf:type owl:Class ;
+     rdfs:label "Regulation" ;
+     rdfs:subClassOf odogo:Concept .
+
+odogo:Treaty rdf:type owl:Class ;
+     rdfs:label "Treaty" ;
+     rdfs:subClassOf odogo:Regulation .
+
+odogo:Convention rdf:type owl:Class ;
+     rdfs:label "Convention" ;
+     rdfs:subClassOf odogo:Regulation .
+
+odogo:Decree rdf:type owl:Class ;
+     rdfs:label "Decree" ;
+     rdfs:subClassOf odogo:Regulation .
+
+odogo:Ordinance rdf:type owl:Class ;
+     rdfs:label "Ordinance" ;
+     rdfs:subClassOf odogo:Regulation .
+
+odogo:Act rdf:type owl:Class ;
+     rdfs:label "Act" ;
+     rdfs:subClassOf odogo:Regulation .
+
+odogo:Statute rdf:type owl:Class ;
+     rdfs:label "Statute" ;
+     rdfs:subClassOf odogo:Regulation .
+
+odogo:Licence rdf:type owl:Class ;
+     rdfs:label "Licence" ;
+     rdfs:subClassOf odogo:Regulation .
+
+odogo:Code rdf:type owl:Class ;
+     rdfs:label "Code" ;
+     rdfs:subClassOf odogo:Regulation .
+
+odogo:Person rdf:type owl:Class ;
+     rdfs:label "Person" ;
+     rdfs:subClassOf odogo:Agent .
+
+odogo:Organisation rdf:type owl:Class ;
+     rdfs:label "Organisation" ;
+     rdfs:subClassOf odogo:Agent .
+
+odogo:Government rdf:type owl:Class ;
+     rdfs:label "Government" ;
+     rdfs:subClassOf odogo:Organisation .
+
+odogo:GovernmentAgency rdf:type owl:Class ;
+     rdfs:label "GovernmentAgency" ;
+     rdfs:subClassOf odogo:Government .
+
+odogo:NonGovernmentalOrganisation rdf:type owl:Class ;
+     rdfs:label "NonGovernmentalOrganisation" ;
+     rdfs:subClassOf odogo:Organisation .
+
+odogo:Nation rdf:type owl:Class ;
+     rdfs:label "Nation" ;
+     rdfs:subClassOf odogo:Organisation .
+
+odogo:Group rdf:type owl:Class ;
+     rdfs:label "Group" ;
+     rdfs:subClassOf odogo:Organisation .
+
+odogo:Business rdf:type owl:Class ;
+     rdfs:label "Business" ;
+     rdfs:subClassOf odogo:Organisation .
+
+odogo:AgentRole rdf:type owl:Class ;
+     rdfs:label "AgentRole" ;
+     rdfs:subClassOf odogo:Concept .
+
+odogo:Manufacturer rdf:type owl:Class ;
+     rdfs:label "Manufacturer" ;
+     rdfs:subClassOf odogo:AgentRole .
+
+odogo:Shipper rdf:type owl:Class ;
+     rdfs:label "Shipper" ;
+     rdfs:subClassOf odogo:AgentRole .
+
+odogo:Operator rdf:type owl:Class ;
+     rdfs:label "Operator" ;
+     rdfs:subClassOf odogo:AgentRole .
+
+odogo:Contractor rdf:type owl:Class ;
+     rdfs:label "Contractor" ;
+     rdfs:subClassOf odogo:AgentRole .
+
+odogo:Owner rdf:type owl:Class ;
+     rdfs:label "Owner" ;
+     rdfs:subClassOf odogo:AgentRole .
+
+odogo:Supplier rdf:type owl:Class ;
+     rdfs:label "Supplier" ;
+     rdfs:subClassOf odogo:AgentRole .
+
+odogo:Resident rdf:type owl:Class ;
+     rdfs:label "Resident" ;
+     rdfs:subClassOf odogo:AgentRole .
+
+odogo:Stakeholder rdf:type owl:Class ;
+     rdfs:label "Stakeholder" ;
+     rdfs:subClassOf odogo:AgentRole .
+
+odogo:Employer rdf:type owl:Class ;
+     rdfs:label "Employer" ;
+     rdfs:subClassOf odogo:AgentRole .
+
+odogo:Employee rdf:type owl:Class ;
+     rdfs:label "Employee" ;
+     rdfs:subClassOf odogo:AgentRole .
+
+odogo:Regulator rdf:type owl:Class ;
+     rdfs:label "Regulator" ;
+     rdfs:subClassOf odogo:AgentRole .
+
+odogo:Director rdf:type owl:Class ;
+     rdfs:label "Director" ;
+     rdfs:subClassOf odogo:AgentRole .
+
