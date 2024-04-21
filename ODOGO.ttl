@@ -1,18 +1,18 @@
 @prefix dc: <http://purl.org/dc/terms/> .
-@prefix odogo: <http://odogo.byethost16.com/> .
+@prefix odogo: <http://purl.org/ODOGO/> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix xml: <http://www.w3.org/XML/1998/namespace> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
-<http://odogo.byethost16.com/> rdf:type owl:Ontology ;
+<http://purl.org/ODOGO/> rdf:type owl:Ontology ;
      dc:title "Offshore Decommissioning Oil & Gas Ontology (ODOGO)"@en ;
      dc:publisher "National Decommissioning Centre"@en ;
      dc:creator "Adam Arfaoui" ;
      dc:created "2020-03-20"@en ;
      dc:modified "2020-02-12"@en ;
-     rdfs:isDefinedBy <http://odogo.byethost16.com/index.ttl> ;
+     rdfs:isDefinedBy <http://purl.org/ODOGO> ;
      rdfs:label "Offshore Decommissioning Oil & Gas Ontology (ODOGO)" ;
      dc:description """This ontology describes all classes, object properties, data properties, named individuals, annotation properties and namespace declarations to define an offshore decommissioning project. This first release describes a schema to define all information for project-relevant sites.""" ;
      owl:versionInfo "0.0.1" .
